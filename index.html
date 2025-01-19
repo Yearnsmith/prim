@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'"
+  />
+  <meta
+    http-equiv="X-Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'"
+  />
+  <title>Slider</title>
+</head>
+<body>
+  <h1>Slider</h1>
+  <p>
+    Run simultaneous slides!
+  </p>
+  <section id="slideshow1">
+    <h2>Slideshow 1</h2>
+    <button type="button" class="button:openDir" data-slideshow="1">Open a Folder</button>
+    <p>File Path: <strong id="result_dirPathDisplay-1"></strong></p>
+  </section>
+
+  <section id="slideshow2">
+    <h2>Slideshow 2</h2>
+    <button type="button" class="button:openDir" data-slideshow="2">Open a Folder</button>
+    <p>File Path: <strong id="result_dirPathDisplay-2"></strong></p>
+  </section>
+
+  <section id="slideshow3">
+    <h2>Slideshow 3</h2>
+    <button type="button" class="button:openDir" data-slideshow="3">Open a Folder</button>
+    <p>File Path: <strong id="result_dirPathDisplay-3"></strong></p>
+  </section>
+
+  <footer>
+    <small id="info"></small>
+  </footer>
+  <script src="./renderer.js"></script>
+</body>
+</html>
