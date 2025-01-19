@@ -1,11 +1,20 @@
 html {
-  background-color: hsl(0 0 10 / 1);
-  color: hsl(0 0 75 / 1);
+  --colour--charcoal: hsl(0 0 15 / 1);
+  --colour--charcoal-dark: hsl(0 0 10 / 1);
+  --colour--chalk: hsl(0 0 95 / 1);
+  --colour--chalk-dark: hsl(0 0 75 / 1);
+  background-color: var(--colour--charcoal);
+  color: var(--colour--chalk);
+  background-color: var(--colour--chalk);
+  color: var(--colour--charcoal);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
   &, body {
     padding: 0;
     margin: 0;
+  }
+  button {
+    cursor: pointer;
   }
 }
 
