@@ -1,6 +1,6 @@
 const { app } = require('electron');
 const { ipcRenderer, contextBridge } = require('electron/renderer');
-console.log('app:', app);
+
 contextBridge.exposeInMainWorld('versions', {
   node: () => process.versions.node,
   chrome: () => process.versions.chrome,
@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld('versions', {
 });
 
 contextBridge.exposeInMainWorld('appPrefs', {
+  picturePath: async () => ipcRenderer.invoke('getPicturePath'),
   activeDirs: async () => {
     const picturePath = await ipcRenderer.invoke('getPicturePath');
     const value = {

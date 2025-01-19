@@ -1,13 +1,14 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron/main');
-const { ipcRenderer } = require('electron/renderer');
 const path = require('node:path');
 
-async function handleDirOpen ({ sliderIndex = 1, sliderName = '' }) {
-  // const { cancelled, filePaths: paths } = await dialog.showOpenDialog({
-  const response = await dialog.showOpenDialog({
-    title: `Select Folder for ${sliderName || `Slider ${sliderIndex}`} images`,
+async function handleDirOpen(event, {
+  currentPath = app.getPath('pictures'),
+  slideshowName = 'Slideshow'
+}) {
+  const { canceled, filePaths: paths } = await dialog.showOpenDialog({
+    title: `Select Folder for ${slideshowName} images`,
     buttonLabel: 'Use this one',
-    defaultPath: app.getPath('pictures'),
+    defaultPath: currentPath,
     properties: [
       'openDirectory',
       'multiSelections',
@@ -15,11 +16,10 @@ async function handleDirOpen ({ sliderIndex = 1, sliderName = '' }) {
       'dontAddToRecent',
     ],
   });
-  console.log('response:', response);
-  if (!response.canceled) {
-    console.log('response.filePaths:\n', response.filePaths);
-    console.log('joined response.filePaths:\n', response.filePaths.join(', '));
-    return response.filePaths.join(', ');
+  if (!canceled) {
+    return paths[0];
+  } else {
+    return 'isCancelled' ?? currentPath;
   }
 };
 
@@ -28,9 +28,9 @@ async function handleUpdateActiveDirs (event, { slideshowNo, dirPath }) {
   const window = BrowserWindow.fromWebContents(webContents);
   console.log('args:');
   console.log({ slideshowNo, dirPath });
-  const appData = app.getPath('appData');
-  console.log('appData:', appData);
-  window.setTitle('var updated?');
+
+  console.log(webContents.localStorage);
+
 }
 
 const createWindow = () => {
@@ -50,9 +50,10 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
+ipcMain.on('variable:update:activeDirs', handleUpdateActiveDirs);
+
 app.whenReady().then(() => {
-  ipcMain.handle('dialog:openDir', handleDirOpen);
-  ipcMain.on('variable:update:activeDirs', handleUpdateActiveDirs);
+  ipcMain.handle('dialog:openDir', (e, args) => handleDirOpen(e, args));
   ipcMain.handle('getPicturePath', () => app.getPath('pictures'));
 
   createWindow();

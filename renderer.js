@@ -1,31 +1,36 @@
-// let { activeDirs } = remote.getGlobal('appPreferences');
-
 const dirSelectorBtns = Array.from(document.getElementsByClassName('button\:openDir'));
 
-dirSelectorBtns.forEach((btn) => {
-  btn.addEventListener('click', async () => {
-    const slideshowNo = btn.getAttribute('data-slideshow');
-    const dirPath = await window.electronAPI.openDir({
-      sliderIndex: Number(slideshowNo),
-    });
+async function getDefaultPicturePath(index) {
+  const pathString = await appPrefs.picturePath();
+  return pathString;
+}
 
-    const displayId = `result_dirPathDisplay-${slideshowNo}`;
-
-    const dirPathDisplay = document.getElementById(displayId);
-    dirPathDisplay.innerText = dirPath;
-    console.log('slideshowNo:', slideshowNo);
-    await appPrefs.setActiveDir({ slideshowNo, dirPath });
-    console.dir(appPrefs);
-  })
-});
-
+const DIR_PATH_CONFIG = JSON.parse(window.localStorage.getItem('activeDirs'));
 dirSelectorBtns.forEach(async (btn) => {
-  const pathObj = await appPrefs.activeDirs();
+
   const slideshowNo = btn.getAttribute('data-slideshow');
   const displayId = `result_dirPathDisplay-${slideshowNo}`;
-  dirPathDisplay = document.getElementById(displayId);
-  console.log({ btn, slideshowNo, displayId, pathObj, [pathObj[slideshowNo]]: pathObj[slideshowNo] }, dirPathDisplay);
-  dirPathDisplay.innerText = pathObj[slideshowNo];
+  const dirPathDisplay = document.getElementById(displayId);
+
+  dirPathDisplay.innerText = DIR_PATH_CONFIG?.[slideshowNo] ?? await getDefaultPicturePath();
+
+  btn.addEventListener('click', async () => {
+    const currentDirPathConfig = JSON.parse(window.localStorage.getItem('activeDirs'))
+    console.dir('currentDirPathConfig:');
+    console.dir(currentDirPathConfig);
+    console.log('slideshowNo:', slideshowNo);
+    console.log('currentDirPathConfig?.[slideshowNo]:', currentDirPathConfig?.[slideshowNo]);
+    const dirPath = await electronAPI.openDir({
+      slideshowName: '',
+      currentPath: currentDirPathConfig?.[slideshowNo],
+    });
+
+    dirPathDisplay.innerText = dirPath;
+    localStorage.setItem('activeDirs', JSON.stringify({
+      ...(currentDirPathConfig ?? {}),
+      [slideshowNo]: dirPath,
+    }));
+  });
 });
 
 const information = document.getElementById('info');
