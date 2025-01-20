@@ -1,4 +1,3 @@
-const { app } = require('electron');
 const { ipcRenderer, contextBridge } = require('electron/renderer');
 
 contextBridge.exposeInMainWorld('versions', {
@@ -30,4 +29,7 @@ contextBridge.exposeInMainWorld('appPrefs', {
 
 contextBridge.exposeInMainWorld('electronAPI', {
   openDir: (options) => ipcRenderer.invoke('dialog:openDir', options),
+  navBack: () => ipcRenderer.invoke('nav:back'),
+  getImageFileNames: (path) => ipcRenderer.invoke('slideshow:getFileNames', path),
+  getImagesBase64: (folderPath, pathArray) => ipcRenderer.invoke('slideshow:getImagesBase64', folderPath, pathArray),
 });

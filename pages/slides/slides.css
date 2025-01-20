@@ -1,0 +1,39 @@
+/* @import url('../index.css'); */
+body {
+  display: block;
+  padding: 0;
+}
+
+button.back-nav {
+  position: absolute;
+  top: 0.5em;
+  left: 2ch;
+  opacity: 0.25;
+  z-index: 9000;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  height: 100%;
+}
+section {
+  padding-inline: 2ch;
+  padding-block: 0.5em;
+  outline: 1px solid orange;
+  outline-offset: -1px;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50%;
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; img-src 'self' data:"
+  />
+  <meta
+    http-equiv="X-Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; img-src 'self' data:"
+  />
+
+  <title>Slider</title>
+  <link rel="stylesheet" href="../../index.css">
+  <link rel="stylesheet" href="./slides.css">
+</head>
+<body>
+
+  <button class="back-nav">⬅ Back</button>
+
+  <main>
+    <section id="slideshow-1" data-slideshow="1">
+      <p>slideshow 1 goes here</p>
+      <p>source: <strong id="result_dirPathDisplay-1"></strong></p>
+    </section>
+    <section id="slideshow-2" data-slideshow="2">
+      <p>slideshow 2 goes here</p>
+      <p>source: <strong id="result_dirPathDisplay-2"></strong></p>
+    </section>
+    <section id="slideshow-3" data-slideshow="3">
+      <p>slideshow 3 goes here</p>
+      <p>source: <strong id="result_dirPathDisplay-3"></strong></p>
+    </section>
+  </main>
+
+  <script src="./renderer.js"></script>
+</body>
+</html>
