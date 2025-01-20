@@ -1,8 +1,5 @@
+@import url(./assets/colours.css);
 html {
-  --colour--charcoal: hsl(0 0 15 / 1);
-  --colour--charcoal-dark: hsl(0 0 10 / 1);
-  --colour--chalk: hsl(0 0 95 / 1);
-  --colour--chalk-dark: hsl(0 0 75 / 1);
   background-color: var(--colour--charcoal);
   color: var(--colour--chalk);
   /* background-color: var(--colour--chalk); */
@@ -17,6 +14,7 @@ html {
     cursor: pointer;
     outline: 1px solid var(--colour--charcoal-dark);
     color: var(--colour--charcoal-dark);
+    background-color: var(--colour--chalk);
     text-decoration: none;
     border-radius: 4px;
     display: inline-block;

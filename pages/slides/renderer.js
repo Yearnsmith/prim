@@ -14,6 +14,7 @@ slideshows.forEach(async (s) => {
   const images = await loadSlideshowImages(dirString);
 
   cycleImages(s, images);
+  // setBackgroundImage(s, images);
 });
 
 /**
@@ -49,14 +50,6 @@ function cycleImages(el, nameArray) {
 function setBackgroundImage (el, imageObjectArray) {
   const image = imageObjectArray[Math.floor(Math.random() * imageObjectArray.length)];
   let captionEl = el.querySelector('.image-caption');
-  if (!captionEl) {
-    captionEl = document.createElement('p');
-    captionEl.className = 'image-caption';
-    el.style.position = 'relative';
-    captionEl.style.position = 'absolute';
-    captionEl.style.bottom = 0;
-    captionEl.style.right = 0
-  }
   captionEl.innerText = image.fileName;
   el.insertAdjacentElement('beforeend', captionEl);
   el.style.backgroundImage = `url("data:image/${image.fileType};base64,${image.base64}")`;

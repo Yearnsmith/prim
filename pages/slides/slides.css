@@ -1,18 +1,30 @@
-/* @import url('../index.css'); */
+@import url('../../assets/colours.css');
+html {
+  &, * {
+    box-sizing: border-box;
+  }
+}
+
 body {
   display: block;
   padding: 0;
 }
-
-button.back-nav {
+header {
   position: absolute;
-  top: 0.5em;
-  left: 2ch;
-  opacity: 0.25;
+  opacity: 0;
+  /* background-color: var(--colour--charcoal); */
+  background-color: darkblue;
+  width: 100%;
+  padding:1.25em;
+  margin-top: -3em;
   z-index: 9000;
+  transition: margin 500ms, opacity 750ms;
 
   &:hover {
+    transition: margin 500ms, opacity 1s;
     opacity: 1;
+    /* margin-top: -1.25em; */
+    margin-top: 0;
   }
 }
 
@@ -25,15 +37,34 @@ main {
 section {
   padding-inline: 2ch;
   padding-block: 0.5em;
-  outline: 1px solid orange;
-  outline-offset: -1px;
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
 
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 50%;
+  opacity: 0.5;
+  /* outline: 1px solid orange; */
+  /* outline-offset: -1px; */
 
   p {
     padding: 0;
     margin: 0;
+    opacity: 0;
+    &.image-caption {
+      margin-block-start: auto;
+      margin-block-end: -0.5em;
+      text-align: center;
+      font-weight: 900;
+      background-color: var(--colour--charcoal);
+      padding-block: 0.25em;
+      opacity: 0;
+
+      p:has(+&:hover),
+      &:hover {
+        opacity: .85;
+      }
+    }
   }
 }
