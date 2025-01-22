@@ -32,5 +32,9 @@ dirSelectorBtns.forEach(async (dirSelector) => {
 
 const information = document.getElementById('info');
 
-information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`;
+const copyright = `© yrnsmth 2025${2025 < new Date().getFullYear() ? ` ‒ ${new Date().getFullYear()}` : ''}`;
+const version = 'v0.1.0';
+
+information.style.whiteSpaceCollapse = 'preserve'
+information.innerText = `${copyright}  ${version}`;
 
