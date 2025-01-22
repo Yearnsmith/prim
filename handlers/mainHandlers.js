@@ -42,13 +42,15 @@ async function handleDirOpen(_, {
 };
 
 /**
- * handleSetDefaultState
  * @param {Event<HTMLElement>} _ - event. This is unused
  * @param {number} slideShowCount - number of slideshows
  *
  * @returns {SlideshowConfigMap}
  */
-function handleSetDefaultState (_, slideShowCount = GLOBAL_APP_DEFAULTS.SLIDESHOW_COUNT) {
+function handleGetDefaultState (
+  _,
+  slideShowCount = GLOBAL_APP_DEFAULTS.SLIDESHOW_COUNT
+) {
 
   /** @type {SlideshowConfigMap} */
   const obj = {};
@@ -78,8 +80,7 @@ async function handleUpdateActiveDirs (event, { slideshowNo, dirPath }) {
 }
 
 /**
- *
- * @param {IpcMainInvokeEvent} event
+ * @param   {IpcMainInvokeEvent} event
  * @returns {function}
  */
 function handleNavBack(event) {
@@ -128,7 +129,7 @@ function handleGetImagesBase64(_, folderPath, imageNameArray) {
 
 module.exports = {
   handleDirOpen,
-  handleSetDefaultState,
+  handleGetDefaultState,
   handleUpdateActiveDirs,
   handleNavBack,
   handleGetFileNames,

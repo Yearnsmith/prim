@@ -4,7 +4,7 @@ const path = require('node:path');
 const {
   CONF_DEFAULTS,
   handleDirOpen,
-  handleSetDefaultState,
+  handleGetDefaultState,
   handleUpdateActiveDirs,
   handleNavBack,
   handleGetFileNames,
@@ -31,7 +31,7 @@ app.on('window-all-closed', () => {
 ipcMain.on('variable:update:activeDirs', handleUpdateActiveDirs);
 
 app.whenReady().then(() => {
-  ipcMain.handle('setup:setDefaultAppState', handleSetDefaultState);
+  ipcMain.handle('prefs:getDefaultAppState', handleGetDefaultState);
   ipcMain.handle('dialog:openDir', handleDirOpen);
   ipcMain.handle('getPicturePath', () => CONF_DEFAULTS.DIR_PATH);
   ipcMain.handle('nav:back', handleNavBack);

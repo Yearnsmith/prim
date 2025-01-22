@@ -7,9 +7,11 @@ contextBridge.exposeInMainWorld('versions', {
   node: () => process.versions.node,
   chrome: () => process.versions.chrome,
   electron: () => process.versions.electron,
+  application: () => app.getVersion(),
 });
 
 contextBridge.exposeInMainWorld('appPrefs', {
+  defaultGlobalConfig: GLOBAL_APP_DEFAULTS,
   picturePath: async () => ipcRenderer.invoke('getPicturePath'),
   activeDirs: async () => {
     const picturePath = await ipcRenderer.invoke('getPicturePath');
@@ -21,7 +23,7 @@ contextBridge.exposeInMainWorld('appPrefs', {
   return value;
 },
   setActiveDir: (args) => {
-    return ipcRenderer.send('variable:update:activeDirs', args);
+    ipcRenderer.send('variable:update:activeDirs', args);
   },
   sliderNameMap: {
     '1': 'Slideshow 1',

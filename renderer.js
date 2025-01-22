@@ -1,6 +1,6 @@
 const dirSelectorBtns = Array.from(document.getElementsByClassName('button\:openDir'));
 
-async function getDefaultPicturePath(index) {
+async function getDefaultPicturePath() {
   const pathString = await appPrefs.picturePath();
   return pathString;
 }
