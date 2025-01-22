@@ -1,4 +1,7 @@
 const { ipcRenderer, contextBridge } = require('electron/renderer');
+const {GLOBAL_APP_DEFAULTS, SLIDESHOW_DEFAULTS } = require('./typing/enums');
+const {  SlideshowConfigMap, GlobalConfig } = require('./typing/types');
+const { app } = require('electron');
 
 contextBridge.exposeInMainWorld('versions', {
   node: () => process.versions.node,

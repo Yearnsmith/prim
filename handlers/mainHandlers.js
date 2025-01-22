@@ -3,6 +3,11 @@ const {
   dialog,
   IpcMainInvokeEvent,
 } = require('electron/main');
+const { SlideshowConfigMap } = require('../typing/types');
+const {
+  SLIDESHOW_DEFAULTS,
+  GLOBAL_APP_DEFAULTS,
+} = require('../typing/enums');
 const { readdirSync, readFileSync } = require('node:fs');
 
 /**
@@ -37,55 +42,24 @@ async function handleDirOpen(_, {
 };
 
 /**
- * @typedef {Object} SlideshowConfig
- * @property {string} SlideshowConfig.name
- * @property {string} SlideshowConfig.dirPath
- * @property {number} SlideshowConfig.intervalMs
- * @property {number} SlideshowConfig.intervalS
- * @property {boolean} SlideshowConfig.isInDebug
- */
-
-const DEFAULT_INTERVAL = 1250;
-
-/**
- * CONF_DEFAULTS
- * @readonly
- * @enum {string}
- */
-const CONF_DEFAULTS = {
-  NAME: "Slideshow-$",
-  DIR_PATH: app.getPath("pictures"),
-  /** @type {number} */
-  INTERVAL_MS: DEFAULT_INTERVAL,
-  /** @type {number} */
-  INTERVAL_S: DEFAULT_INTERVAL / 1000,
-  /** @type {boolean} */
-  IS_IN_DEBUG: false,
-};
-
-/**
- * @typedef {Object.<number, SlideshowConfig>} SlideshowConfigMap
- */
-
-/**
  * handleSetDefaultState
  * @param {Event<HTMLElement>} _ - event. This is unused
  * @param {number} slideShowCount - number of slideshows
  *
  * @returns {SlideshowConfigMap}
  */
-function handleSetDefaultState (_, slideShowCount = 3) {
+function handleSetDefaultState (_, slideShowCount = GLOBAL_APP_DEFAULTS.SLIDESHOW_COUNT) {
 
   /** @type {SlideshowConfigMap} */
   const obj = {};
 
   for (let n = 1; n<=slideShowCount; n++) {
     obj[i] = {
-      name: CONF_DEFAULTS.NAME,
-      dirPath: CONF_DEFAULTS.DIR_PATH,
-      intervalMs: CONF_DEFAULTS.INTERVAL_MS,
-      intervalS: CONF_DEFAULTS.INTERVAL_S,
-      isInDebug: CONF_DEFAULTS.IS_IN_DEBUG,
+      name: SLIDESHOW_DEFAULTS.NAME,
+      dirPath: SLIDESHOW_DEFAULTS.DIR_PATH,
+      intervalMs: SLIDESHOW_DEFAULTS.INTERVAL_MS,
+      intervalS: SLIDESHOW_DEFAULTS.INTERVAL_S,
+      isInDebug: SLIDESHOW_DEFAULTS.IS_IN_DEBUG,
     }
   }
 
@@ -154,7 +128,6 @@ function handleGetImagesBase64(_, folderPath, imageNameArray) {
 
 module.exports = {
   handleDirOpen,
-  CONF_DEFAULTS,
   handleSetDefaultState,
   handleUpdateActiveDirs,
   handleNavBack,
