@@ -1,14 +1,12 @@
 {
-  "name": "slider",
-  "version": "0.0.1",
-  "description": "a slideshow app",
+  "name": "prim",
+  "version": "0.1.0",
+  "description": "Pictures loaded Randomly Into Multiplex. PRIM... not proper.",
   "build": {
-    "appId": "yrnsmth.slider",
+    "appId": "com.yrnsmth.prim",
     "nativeRebuilder": "parallel",
-    "win": {
-      "target": ["nsis", "msi"],
-      "icon": "./assets/slider.ico"
-    }
+    "icon": "./assets/prim.ico",
+    "target": ["msi", "appx", "linux"]
   },
   "main": "index.js",
   "scripts": {
@@ -19,7 +17,8 @@
   "keywords": [
     "Slide",
     "slideshow",
-    "presentation"
+    "presentation",
+    "Multi Frame"
   ],
   "author": "Derick Yearnsmith",
   "license": "ISC",
