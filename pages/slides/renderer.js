@@ -37,20 +37,26 @@ async function loadSlideshowImages(path) {
   return base64Images;
 }
 
-function cycleImages(el, nameArray) {
-  setInterval(() => setBackgroundImage(el, nameArray), 1250);
+/**
+ *
+ * @param {HTMLElement} el
+ * @param {imageObject[]} imageObjectArray
+ */
+function cycleImages(el, imageObjectArray) {
+  setInterval(() => setBackgroundImage(el, imageObjectArray), 1250);
 }
 
 /**
  *
  * @param {HTMLElement} el
- * @param {Array.<imageObject>} imageObjectArray
- * @
+ * @param {imageObject[]} imageObjectArray
  */
 function setBackgroundImage (el, imageObjectArray) {
-  const image = imageObjectArray[Math.floor(Math.random() * imageObjectArray.length)];
-  let captionEl = el.querySelector('.image-caption');
-  captionEl.innerText = image.fileName;
-  el.insertAdjacentElement('beforeend', captionEl);
-  el.style.backgroundImage = `url("data:image/${image.fileType};base64,${image.base64}")`;
+  if (imageObjectArray && imageObjectArray.length) {
+    const image = imageObjectArray[Math.floor(Math.random() * imageObjectArray.length)];
+    let captionEl = el.querySelector('.image-caption');
+    captionEl.innerText = image.fileName;
+    el.insertAdjacentElement('beforeend', captionEl);
+    el.style.backgroundImage = `url("data:image/${image.fileType};base64,${image.base64}")`;
+  }
 }

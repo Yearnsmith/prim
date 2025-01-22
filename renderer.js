@@ -6,26 +6,23 @@ async function getDefaultPicturePath(index) {
 }
 
 const DIR_PATH_CONFIG = JSON.parse(window.localStorage.getItem('activeDirs'));
-dirSelectorBtns.forEach(async (btn) => {
+dirSelectorBtns.forEach(async (dirSelector) => {
 
-  const slideshowNo = btn.getAttribute('data-slideshow');
+  const slideshowNo = dirSelector.getAttribute('data-slideshow');
   const displayId = `result_dirPathDisplay-${slideshowNo}`;
   const dirPathDisplay = document.getElementById(displayId);
 
-  dirPathDisplay.innerText = DIR_PATH_CONFIG?.[slideshowNo] ?? await getDefaultPicturePath();
+  dirPathDisplay.value = DIR_PATH_CONFIG?.[slideshowNo] ?? await getDefaultPicturePath();
 
-  btn.addEventListener('click', async () => {
+  dirSelector.addEventListener('click', async () => {
     const currentDirPathConfig = JSON.parse(window.localStorage.getItem('activeDirs'))
-    console.dir('currentDirPathConfig:');
-    console.dir(currentDirPathConfig);
-    console.log('slideshowNo:', slideshowNo);
-    console.log('currentDirPathConfig?.[slideshowNo]:', currentDirPathConfig?.[slideshowNo]);
+
     const dirPath = await electronAPI.openDir({
       slideshowName: '',
       currentPath: currentDirPathConfig?.[slideshowNo],
     });
 
-    dirPathDisplay.innerText = dirPath;
+    dirPathDisplay.value = dirPath;
     localStorage.setItem('activeDirs', JSON.stringify({
       ...(currentDirPathConfig ?? {}),
       [slideshowNo]: dirPath,
@@ -36,9 +33,4 @@ dirSelectorBtns.forEach(async (btn) => {
 const information = document.getElementById('info');
 
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`;
-
-const runAsyncOnRender = async () => {
-}
-
-runAsyncOnRender();
 
