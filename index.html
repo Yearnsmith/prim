@@ -17,34 +17,77 @@
 </head>
 <body>
   <header>
-    <h1>Slider</h1>
+    <h1>PRIM</h1>
+    <section>
+        <button id="toggle-dark-mode">Theme: System</button>
+        <button id="reset-to-system" disabled="true">use System</button>
+    </section>
   </header>
   <main>
-
+    <section>
       <p>
-        Run simultaneous slides!
+        Pictures loaded Randomly Into Multiplex.
       </p>
-      <section id="slideshow1">
+      <p>
+        PRIM... not proper.
+      </p>
+    </section>
+    <section id="slideshow-settings">
+      <form id="slideshow1" class="settings-box" data-slideshow="1">
         <h2>Slideshow 1</h2>
-        <button type="button" class="button:openDir" data-slideshow="1">Open a Folder</button>
-        <p>File Path: <strong id="result_dirPathDisplay-1"></strong></p>
-      </section>
+        <button type="button" class="folder-picker">Open a Folder</button>
+        <p>
+          <label>File Path:
+            <input type="url" name="file-path-1" id="result_dirPathDisplay-1" readonly />
+          </label>
+        </p>
+        <p>
+          <label>
+            Duration:
+            <input type="number" name="interval-picker-1" step="0.25" min="0.75" max="300"/>
+            Seconds
+          </label>
+        </p>
+      </form>
 
-      <section id="slideshow2">
+      <form id="slideshow2" class="settings-box" data-slideshow="2">
         <h2>Slideshow 2</h2>
-        <button type="button" class="button:openDir" data-slideshow="2">Open a Folder</button>
-        <p>File Path: <strong id="result_dirPathDisplay-2"></strong></p>
-      </section>
+        <button type="button" class="folder-picker">Open a Folder</button>
+        <p>
+          <label>File Path:
+            <input type="text" name="file-path-2" id="result_dirPathDisplay-2" readonly />
+          </label>
+        </p>
+        <p>
+          <label>
+            Duration:
+            <input type="number" name="interval-picker-2" step="0.25" min="0.75" max="300"/>
+            Seconds
+          </label>
+        </p>
+      </form>
 
-      <section id="slideshow3">
+      <form id="slideshow3" class="settings-box" data-slideshow="3">
         <h2>Slideshow 3</h2>
-        <button type="button" class="button:openDir" data-slideshow="3">Open a Folder</button>
-        <p>File Path: <strong id="result_dirPathDisplay-3"></strong></p>
-      </section>
+        <button type="button" class="folder-picker">Open a Folder</button>
+        <p>
+          <label><span class="button">File Path:</span>
+            <input type="text" name="file-path-3" id="result_dirPathDisplay-3" readonly />
+          </label>
+        </p>
+        <p>
+          <label>
+            Duration:
+            <input type="number" name="interval-picker-3" step="0.25" min="0.75" max="300"/>
+            Seconds
+          </label>
+        </p>
+      </form>
 
-      <section>
-        <a class="button" href="./pages/slides/index.html">Run</a>
-      </section>
+    </section>
+    <section>
+      <a class="button" href="./pages/slides/index.html">Run</a>
+    </section>
   </main>
   <footer>
     <small id="info"></small>

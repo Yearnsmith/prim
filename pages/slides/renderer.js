@@ -5,16 +5,18 @@ const backNav = Array.from(
   electronAPI.navBack();
 });
 
-const activeDirs = JSON.parse(window.localStorage.getItem('activeDirs'));
+let slideshowConfig = JSON.parse(window.localStorage.getItem('slideshowConfig'));
+let appConfig = JSON.parse(window.localStorage.getItem('appConfig'));
+
 const slideshows = Array.from(document.querySelectorAll('[id|=slideshow]'));
 slideshows.forEach(async (s) => {
   const dataSet = s.dataset.slideshow;
-  const dirString = activeDirs[dataSet];
+  const dirString = slideshowConfig?.[dataSet]?.dirPath ?? appConfig.picturesDir;
   s.querySelector('[id|=result_dirPathDisplay').innerText = dirString;
   const images = await loadSlideshowImages(dirString);
 
-  cycleImages(s, images);
-  // setBackgroundImage(s, images);
+  const interval = slideshowConfig?.[dataSet]?.intervalMs;
+  cycleImages(s, images, interval);
 });
 
 /**
@@ -37,20 +39,26 @@ async function loadSlideshowImages(path) {
   return base64Images;
 }
 
-function cycleImages(el, nameArray) {
-  setInterval(() => setBackgroundImage(el, nameArray), 1250);
+/**
+ *
+ * @param {HTMLElement} el
+ * @param {imageObject[]} imageObjectArray
+ */
+function cycleImages(el, imageObjectArray, interval = 1250) {
+  setInterval(() => setBackgroundImage(el, imageObjectArray), interval);
 }
 
 /**
  *
  * @param {HTMLElement} el
- * @param {Array.<imageObject>} imageObjectArray
- * @
+ * @param {imageObject[]} imageObjectArray
  */
 function setBackgroundImage (el, imageObjectArray) {
-  const image = imageObjectArray[Math.floor(Math.random() * imageObjectArray.length)];
-  let captionEl = el.querySelector('.image-caption');
-  captionEl.innerText = image.fileName;
-  el.insertAdjacentElement('beforeend', captionEl);
-  el.style.backgroundImage = `url("data:image/${image.fileType};base64,${image.base64}")`;
+  if (imageObjectArray && imageObjectArray.length) {
+    const image = imageObjectArray[Math.floor(Math.random() * imageObjectArray.length)];
+    let captionEl = el.querySelector('.image-caption');
+    captionEl.innerText = image.fileName;
+    el.insertAdjacentElement('beforeend', captionEl);
+    el.style.backgroundImage = `url("data:image/${image.fileType};base64,${image.base64}")`;
+  }
 }

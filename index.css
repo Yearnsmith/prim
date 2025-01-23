@@ -1,32 +1,45 @@
 @import url(./assets/colours.css);
+:root {
+  color-scheme: dark light;
+  font-size: 10px;
+}
+
 html {
-  background-color: var(--colour--charcoal);
-  color: var(--colour--chalk);
-  /* background-color: var(--colour--chalk); */
-  /* color: var(--colour--charcoal); */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
-  & {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
+
+  @media (prefers-color-scheme: dark) {
+    & {
+      background: var(--colour--charcoal-200);
+      color: var(--colour--chalk-900);
+
+      --input--colour--outline: var(--colour--charcoal-500);
+      --input--colour--background: var(--colour--charcoal-400);
+      --input--colour--color: var(--colour--chalk-900);
+
+    }
   }
-  button, a.button {
-    cursor: pointer;
-    outline: 1px solid var(--colour--charcoal-dark);
-    color: var(--colour--charcoal-dark);
-    background-color: var(--colour--chalk);
-    text-decoration: none;
-    border-radius: 4px;
-    display: inline-block;
-    padding-inline: 1ch;
-    padding-block: 0.5em;
-    border: none;
-    font-weight: 500 !important;
-    font-size: 1em;
+
+  @media (prefers-color-scheme: light) {
+    & {
+      background: var(--colour--pastel-green-900);
+      color: var(--colour--pastel-green-100);
+
+      --input--colour--outline: var(--colour--pastel-green-100);
+      --input--colour--background: var(--colour--pastel-green-800);
+      --input--colour--color: var(--colour--pastel-green-100);
+    }
   }
+
+  --button--colour--outline: var(--input--colour--outline);
+  --button--colour--background: var(--input--colour--background);
+  --button--colour--color: var(--input--colour--color);
 }
 
 body {
+  font-size: 1.8rem;
   height: 100dvh;
   display: grid;
   grid-template-rows: auto 1fr minmax(max-content, 5dvh);
@@ -35,15 +48,104 @@ body {
   margin: 0;
   padding-block: 0;
   padding-inline: 2ch;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 1ch;
+
+    section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      column-gap: 1ch;
+
+      #toggle-dark-mode {
+        width: 15ch;
+      }
+      @media screen and (max-width: 500px) {
+        align-items: flex-end;
+        column-gap: 2ch;
+        row-gap: 0;
+      }
+    }
+  }
+
+  button, .button {
+    cursor: pointer;
+    outline: 1px solid var(--button--colour--outline);
+    color: var(--button-colour--color);
+    background-color: var(--button--colour--background);
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    padding-inline: 1ch;
+    padding-block: 0.5em;
+    border: none;
+    font-weight: 500 !important;
+    font-size: 1em;
+
+    &:disabled {
+      background-color: #888;
+      cursor: not-allowed;
+    }
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(2, auto) 2fr 1fr;
+    label {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      column-gap: 1ch;
+    }
+
+    input {
+      font-size: .9em;
+      font-family: monospace;
+
+      padding-block: 0.5em;
+      padding-inline: 1ch;
+      border-radius: var(--button--border-radius, 4px);
+      border: 1px solid var(--input--colour--outline);
+      background-color: var(--input--colour--background);
+      color: var(--input--colour--color);
+
+      &:is([type=text], [type=url]) {
+        width: clamp(33ch, 33dvw, 400px);
+      }
+      &[type=number] {
+        max-width: 8ch;
+      }
+    }
+    section:last-of-type {
+      align-self: center;
+      justify-self: center;
+    }
+    #slideshow-settings {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: start;
+      align-items: stretch;
+      align-self: unset;
+      column-gap: 5.5dvw;
+
+      form {
+        display: block;
+        orphans: 0;
+      }
+    }
+  }
 }
 footer {
   justify-self: right;
-  /* align-self: end; */
   align-content: end;
   justify-items: end;
   height: 100%;
   width: 100%;
-  /* text-align: right; */
 
   #info {
     display: block;

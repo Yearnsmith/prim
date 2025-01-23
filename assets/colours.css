@@ -1,6 +1,18 @@
-html {
-  --colour--charcoal: hsl(0 0 15 / 1);
-  --colour--charcoal-dark: hsl(0 0 10 / 1);
-  --colour--chalk: hsl(0 0 95 / 1);
-  --colour--chalk-dark: hsl(0 0 75 / 1);
+:root {
+  --colour--charcoal-500: #535353;
+  --colour--charcoal-400: #424242;
+  --colour--charcoal-300: #313131;
+  --colour--charcoal-200: #202020;
+  --colour--charcoal-100: #0f0f0f;
+  --colour--chalk-900: #fff;
+  --colour--chalk-800: #dedede;
+  --colour--chalk-700: #e6e6e6;
+  --colour--pastel-green-900: #afccaf;
+  --colour--pastel-green-800: #8daa8d;
+  --colour--pastel-green-600: #6b886b;
+  --colour--pastel-green-400: #496649;
+  --colour--pastel-green-200: #274427;
+  --colour--pastel-green-100: #052205;
+  --colour--pastel-yellow: #dedeaf;
+
 }
