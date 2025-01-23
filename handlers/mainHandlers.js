@@ -2,6 +2,7 @@ const {
   app,
   dialog,
   IpcMainInvokeEvent,
+  nativeTheme,
 } = require('electron/main');
 const { SlideshowConfigMap } = require('../typing/types');
 const {
@@ -111,8 +112,6 @@ function handleGetFileNames(_, path) {
  * @returns {Array<{fileName: string, fileType: string, base64: string}>}
  */
 function handleGetImagesBase64(_, folderPath, imageNameArray) {
-  console.log('[handleGetFileNames] folderPath:', folderPath);
-  console.log('[handleGetFileNames] imageNameArray:', imageNameArray);
   return imageNameArray.reduce((acc, currName) => {
     const fullPath = `${folderPath}/${currName}`;
 
@@ -127,6 +126,15 @@ function handleGetImagesBase64(_, folderPath, imageNameArray) {
   }, []);
 }
 
+function handleDarkModeToggle() {
+  if (nativeTheme.shouldUseDarkColors) {
+    nativeTheme.themeSource = 'light'
+  } else {
+    nativeTheme.themeSource = 'dark'
+  }
+  return nativeTheme.shouldUseDarkColors
+}
+
 module.exports = {
   handleDirOpen,
   handleGetDefaultState,
@@ -134,4 +142,5 @@ module.exports = {
   handleNavBack,
   handleGetFileNames,
   handleGetImagesBase64,
+  handleDarkModeToggle,
 };

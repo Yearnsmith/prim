@@ -1,6 +1,5 @@
-const { ipcRenderer, contextBridge } = require('electron/renderer');
-const {GLOBAL_APP_DEFAULTS, SLIDESHOW_DEFAULTS } = require('./typing/enums');
-const {  SlideshowConfigMap, GlobalConfig } = require('./typing/types');
+const { ipcRenderer, contextBridge } = require('electron');
+// const { handleSetDefaultAppState } = require('./handlers/preloadHandlers');
 const { app } = require('electron');
 
 contextBridge.exposeInMainWorld('versions', {
@@ -10,8 +9,13 @@ contextBridge.exposeInMainWorld('versions', {
   application: () => app.getVersion(),
 });
 
+contextBridge.exposeInMainWorld('darkMode', {
+  toggle: () => ipcRenderer.invoke('dark-mode:toggle'),
+  system: () => ipcRenderer.invoke('dark-mode:system')
+});
+
 contextBridge.exposeInMainWorld('appPrefs', {
-  defaultGlobalConfig: GLOBAL_APP_DEFAULTS,
+  getTypings: async () => ipcRenderer.invoke('getTypings'),
   picturePath: async () => ipcRenderer.invoke('getPicturePath'),
   activeDirs: async () => {
     const picturePath = await ipcRenderer.invoke('getPicturePath');
@@ -31,6 +35,21 @@ contextBridge.exposeInMainWorld('appPrefs', {
     '3': 'Slideshow 3',
   },
 });
+
+// async function getAndSetDefaults() {
+//   /** @type {SlideshowConfigMap} */
+//   const slideshowState = window.localStorage.getItem('slideshowConfig') ?? SLIDESHOW_DEFAULTS;
+
+//   /** @enum {GlobalConfig} */
+//   const applicationState = window.localStorage.getItem('globalConfig') ?? GLOBAL_APP_DEFAULTS;
+
+//   let done = await handleSetDefaultAppState(applicationState);
+//   done = await handleSetDefaultAppState(slideshowState);
+// }
+
+// await getAndSetDefaults();
+
+
 
 contextBridge.exposeInMainWorld('electronAPI', {
   openDir: (options) => ipcRenderer.invoke('dialog:openDir', options),

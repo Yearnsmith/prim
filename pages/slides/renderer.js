@@ -5,16 +5,18 @@ const backNav = Array.from(
   electronAPI.navBack();
 });
 
-const activeDirs = JSON.parse(window.localStorage.getItem('activeDirs'));
+let slideshowConfig = JSON.parse(window.localStorage.getItem('slideshowConfig'));
+let appConfig = JSON.parse(window.localStorage.getItem('appConfig'));
+
 const slideshows = Array.from(document.querySelectorAll('[id|=slideshow]'));
 slideshows.forEach(async (s) => {
   const dataSet = s.dataset.slideshow;
-  const dirString = activeDirs[dataSet];
+  const dirString = slideshowConfig?.[dataSet]?.dirPath ?? appConfig.picturesDir;
   s.querySelector('[id|=result_dirPathDisplay').innerText = dirString;
   const images = await loadSlideshowImages(dirString);
 
-  cycleImages(s, images);
-  // setBackgroundImage(s, images);
+  const interval = slideshowConfig?.[dataSet]?.intervalMs;
+  cycleImages(s, images, interval);
 });
 
 /**
@@ -42,8 +44,8 @@ async function loadSlideshowImages(path) {
  * @param {HTMLElement} el
  * @param {imageObject[]} imageObjectArray
  */
-function cycleImages(el, imageObjectArray) {
-  setInterval(() => setBackgroundImage(el, imageObjectArray), 1250);
+function cycleImages(el, imageObjectArray, interval = 1250) {
+  setInterval(() => setBackgroundImage(el, imageObjectArray), interval);
 }
 
 /**

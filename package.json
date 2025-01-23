@@ -6,7 +6,7 @@
     "appId": "com.yrnsmth.prim",
     "nativeRebuilder": "parallel",
     "icon": "./assets/prim.ico",
-    "target": ["msi", "appx", "linux"]
+    "target": ["linux"]
   },
   "main": "index.js",
   "scripts": {
