@@ -8,31 +8,36 @@ html {
 body {
   display: block;
   padding: 0;
-}
-header {
-  position: absolute;
-  opacity: 0;
-  /* background-color: var(--colour--charcoal); */
-  background-color: darkblue;
-  width: 100%;
-  padding:1.25em;
-  margin-top: -3em;
-  z-index: 9000;
-  transition: margin 500ms, opacity 750ms;
 
-  &:hover {
-    transition: margin 500ms, opacity 1s;
-    opacity: 1;
-    /* margin-top: -1.25em; */
-    margin-top: 0;
+  header {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    padding:1.25em;
+    margin-top: -3em;
+    z-index: 9000;
+    transition: margin 500ms, opacity 750ms;
+
+    &:hover {
+      transition: margin 500ms, opacity 1s;
+      opacity: 0.8;
+      margin-top: 0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      & {
+        background-color: var(--colour--charcoal-500);
+      }
   }
-}
 
-main {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, 1fr);
-  height: 100%;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    height: 100%;
+  }
 }
 section {
   padding-inline: 2ch;
