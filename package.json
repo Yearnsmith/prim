@@ -4,9 +4,10 @@
   "description": "Pictures loaded Randomly Into Multiplex. PRIM... not proper.",
   "build": {
     "appId": "com.yrnsmth.prim",
+    "productName": "PRIM",
     "nativeRebuilder": "parallel",
     "icon": "./assets/prim.ico",
-    "target": ["msi", "appx", "linux"]
+    "target": ["msi", "appx"]
   },
   "main": "index.js",
   "scripts": {
