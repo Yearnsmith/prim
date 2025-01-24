@@ -39,7 +39,7 @@ html {
 }
 
 body {
-  font-size: 1.8rem;
+  font-size: 1.25rem;
   height: 100dvh;
   display: grid;
   grid-template-rows: auto 1fr minmax(max-content, 5dvh);
@@ -121,10 +121,6 @@ body {
         max-width: 8ch;
       }
     }
-    section:last-of-type {
-      align-self: center;
-      justify-self: center;
-    }
     #slideshow-settings {
       display: flex;
       flex-flow: row wrap;
@@ -135,7 +131,13 @@ body {
 
       form {
         display: block;
-        orphans: 0;
+      }
+      section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+        margin-inline: auto
       }
     }
   }
