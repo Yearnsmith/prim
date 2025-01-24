@@ -40,7 +40,6 @@ const createWindow = () => {
   mainWindow.loadFile(`${app.getAppPath()}/index.html`);
   mainWindow.show();
   mainWindow.maximize();
-  mainWindow.webContents.openDevTools();
 }
 
 app.on('activate', () => {
