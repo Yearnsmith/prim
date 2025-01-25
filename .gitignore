@@ -1,4 +1,4 @@
 **/node_modules/
 **/.vscode/settings.json
 **/pnpm-lock.yaml
-**/package.json
+**/dist/
