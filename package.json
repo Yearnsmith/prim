@@ -7,7 +7,7 @@
     "productName": "PRIM",
     "nativeRebuilder": "parallel",
     "icon": "./assets/prim.ico",
-    "target": ["msi", "appx"]
+    "target": ["msi", "appx", "linux"]
   },
   "main": "index.js",
   "scripts": {
