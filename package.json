@@ -1,16 +1,19 @@
 {
   "name": "prim",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "Pictures loaded Randomly Into Multiplex. PRIM... not proper.",
   "build": {
     "appId": "com.yrnsmth.prim",
     "productName": "PRIM",
     "nativeRebuilder": "parallel",
     "icon": "./assets/prim.ico",
-    "target": ["msi", "appx", "linux"]
+    "win": {
+    	"target": ["nsis", "msi"]
+    }
   },
   "main": "index.js",
   "scripts": {
+    "app:run": "electron .",
     "app:dir": "electron-builder --dir",
     "app:dist": "electron-builder",
     "postinstall": "electron-builder install-app-deps"
