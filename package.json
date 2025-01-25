@@ -8,9 +8,9 @@
     "nativeRebuilder": "parallel",
     "icon": "./assets/prim.ico",
     "win": {
-    	"target": ["nsis", "msi"]
-    },
-    "publish": ["github"]
+    	"target": ["nsis"],
+        "publish": ["github"]
+    }
   },
   "main": "index.js",
   "scripts": {
